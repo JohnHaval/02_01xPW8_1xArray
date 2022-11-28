@@ -1,0 +1,53 @@
+﻿<Window x:Class="_02_01xPW8_1xArray.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_02_01xPW8_1xArray"
+        mc:Ignorable="d"
+        Title="PW8_1" MinHeight="450" MinWidth="800" FontSize="14" WindowStartupLocation="CenterScreen">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem x:Name="CreateArray" Header="Создать" Click="CreateArray_Click"/>
+            <MenuItem x:Name="FillArray" Header="Заполнить" Click="FillArray_Click"/>
+            <MenuItem x:Name="FindLess" Header="Найти наименьшее" ToolTip="Находит наименьшее среди A(n)+A(n+5)" Click="FindLess_Click"/>
+            <MenuItem x:Name="ClearArray" Header="Очистить" Click="ClearArray_Click"/>
+            <MenuItem x:Name="Help" Header="Справка" Click="Help_Click"/>
+        </Menu>
+        <TabControl>
+            <TabItem x:Name="TableTab" Header="Таблица">
+                <DockPanel>
+                    <GroupBox Header="Результат" DockPanel.Dock="Bottom">
+                        <StackPanel>
+                            <Label Content="Наименьшее"/>
+                            <TextBox x:Name="Result" IsReadOnly="True"/>
+                        </StackPanel>
+                    </GroupBox>
+                <GroupBox Header="Целочисленный массив" DockPanel.Dock="Top">
+                    <DataGrid x:Name="VisualArrayTable" CanUserAddRows="False" BeginningEdit="VisualArrayTable_BeginningEdit" CellEditEnding="VisualArrayTable_CellEditEnding"/>
+                </GroupBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem x:Name="ControlTab" Header="Управление">
+                <StackPanel>
+                    <GroupBox Header="Создание">
+                        <StackPanel>
+                            <Label Content="Столбцы:"/>
+                            <TextBox x:Name="ColumnCount" Margin="3" MaxLength="2"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Заполнение">
+                        <StackPanel>
+                            <Label Content="Диапазон"/>
+                            <Separator/>
+                            <Label Content="от:"/>
+                            <TextBox x:Name="FirstValue" Margin="3" MaxLength="5"/>
+                            <Label Content="до:"/>
+                            <TextBox x:Name="SecondValue" Margin="3" MaxLength="5"/>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>
