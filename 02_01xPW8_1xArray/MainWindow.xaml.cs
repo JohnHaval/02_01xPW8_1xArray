@@ -30,7 +30,11 @@ namespace _02_01xPW8_1xArray
         {
             try
             {
-                VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.CreateArray(Convert.ToInt32(ColumnCount.Text), false)).DefaultView;
+                int rowCount = Convert.ToInt32(RowCount.Text);
+                if(rowCount != 1)
+                    VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.CreateArray(rowCount, Convert.ToInt32(ColumnCount.Text))).DefaultView;
+                else
+                    VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.CreateArray(Convert.ToInt32(ColumnCount.Text))).DefaultView;
             }
             catch
             {
@@ -44,7 +48,10 @@ namespace _02_01xPW8_1xArray
             try
             {
                 if (VisualArrayTable.ItemsSource == null) throw new Exception();
-                VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.FillArray(Array.GetArray(), new ArrayCreator.Range(Convert.ToInt32(FirstValue.Text), Convert.ToInt32(SecondValue.Text)))).DefaultView;
+                if (Array.CurrentTable.Rows.Count != 1)
+                    VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.FillArray(Array.GetArray(), new ArrayCreator.Range(Convert.ToInt32(FirstValue.Text), Convert.ToInt32(SecondValue.Text)))).DefaultView;
+                else
+                    VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.FillArray(Array.GetOneDoubleArray(), new ArrayCreator.Range(Convert.ToInt32(FirstValue.Text), Convert.ToInt32(SecondValue.Text)))).DefaultView;
                 TableTab.Focus();
             }
             catch
@@ -85,8 +92,26 @@ namespace _02_01xPW8_1xArray
 
         private void FindLess_Click(object sender, RoutedEventArgs e)
         {
-            _ = LessFinder.GetLess(Array.GetOneArray());
-            Result.Text = LessFinder.ResultDescription;
+            try
+            {
+                Result.Text = LessFinder.GetArrayMin(Array.GetArray()).ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Массив не является двумерным!", "Нахождение наименьшего", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ShiftTo_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                VisualArrayTable.ItemsSource = Array.CreateTable(ArraySorter.ShiftToJSort(Array.GetOneDoubleArray(), Convert.ToInt32(ShiftValue.Text))).DefaultView;
+            }
+            catch
+            {
+                MessageBox.Show("Массив не является одномерным!", "Нахождение наименьшего", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

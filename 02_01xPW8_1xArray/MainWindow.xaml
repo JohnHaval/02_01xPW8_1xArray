@@ -10,7 +10,8 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem x:Name="CreateArray" Header="Создать" Click="CreateArray_Click"/>
             <MenuItem x:Name="FillArray" Header="Заполнить" Click="FillArray_Click"/>
-            <MenuItem x:Name="FindLess" Header="Найти наименьшее" ToolTip="Находит наименьшее среди A(n)+A(n+5)" Click="FindLess_Click"/>
+            <MenuItem x:Name="FindLess" Header="Найти наименьшее" ToolTip="Находит наименьшее значение в массиве" Click="FindLess_Click"/>
+            <MenuItem x:Name="ShiftTo" Header="Сдвинуть массив" ToolTip="Сдвигает значения массива " Click="ShiftTo_Click"/>
             <MenuItem x:Name="ClearArray" Header="Очистить" Click="ClearArray_Click"/>
             <MenuItem x:Name="Help" Header="Справка" Click="Help_Click"/>
         </Menu>
@@ -32,6 +33,8 @@
                 <StackPanel>
                     <GroupBox Header="Создание">
                         <StackPanel>
+                            <Label Content="Строки:"/>
+                            <TextBox x:Name="RowCount" Margin="3" MaxLength="2"/>
                             <Label Content="Столбцы:"/>
                             <TextBox x:Name="ColumnCount" Margin="3" MaxLength="2"/>
                         </StackPanel>
@@ -44,6 +47,12 @@
                             <TextBox x:Name="FirstValue" Margin="3" MaxLength="5"/>
                             <Label Content="до:"/>
                             <TextBox x:Name="SecondValue" Margin="3" MaxLength="5"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox>
+                        <StackPanel>
+                            <Label Content="Значение сдвига" Margin="3"/>
+                            <TextBox x:Name="ShiftValue" MaxLength="2" Margin="3"/>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>

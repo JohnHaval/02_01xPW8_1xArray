@@ -43,6 +43,11 @@ namespace CreatingArray
             int[] arr = new int[n];
             return arr;
         }
+        public static double[] CreateArray(int n)
+        {
+            double[] arr = new double[n];
+            return arr;
+        }
         public static double[,] CreateArray(int n, int m, Range range)
         {
             var arr = CreateArray(n, m);
@@ -65,6 +70,15 @@ namespace CreatingArray
                 {
                     arr[i, j] = rnd.Next(range.FirstValue, range.SecondValue);
                 }
+            }
+            return arr;
+        }
+        public static int[] FillArray(int[] arr, Range range)
+        {
+            Random rnd = new Random();
+            for (int j = 0; j < arr.Length; j++)
+            {
+                arr[j] = rnd.Next(range.FirstValue, range.SecondValue);
             }
             return arr;
         }

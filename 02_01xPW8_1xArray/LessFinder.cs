@@ -29,6 +29,26 @@ namespace _02_01xPW8_1xArray
             }
             ResultDescription = $"A{indexMin + 1} + A{indexMin + 6} = {minVal}";
             return ResultValue = minVal;
-        }        
+        }
+        /// <summary>
+        /// Нахождение минимального значения в двумерном массиве массиве
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static double GetArrayMin(double[,] arr)
+        {
+            double minVal = arr[0, 0];
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                for (int j = 0; j < arr.GetLength(1); j++)
+                {
+                    if (minVal > arr[i, j])
+                    {
+                        minVal = arr[i, j];
+                    }
+                }
+            }
+            return minVal;
+        }
     }
 }

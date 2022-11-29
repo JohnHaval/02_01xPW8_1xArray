@@ -12,6 +12,21 @@ namespace CreatingArray
             for (int i = 0; i < arr.Length; i++)
             {
                 CurrentTable.Columns.Add("Col_" + (i + 1), typeof(string));
+            }
+            var row = CurrentTable.NewRow();
+            for (int j = 0; j < arr.Length; j++)
+            {
+                row[j] = arr[j];
+            }
+            CurrentTable.Rows.Add(row);
+            return CurrentTable;
+        }
+        public DataTable CreateTable(double[] arr)
+        {
+            CurrentTable = new DataTable();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                CurrentTable.Columns.Add("Col_" + (i + 1), typeof(string));
             }            
             var row = CurrentTable.NewRow();
             for (int j = 0; j < arr.Length; j++)
@@ -59,6 +74,16 @@ namespace CreatingArray
             for (int j = 0; j < CurrentTable.Columns.Count; j++)
             {
                 arr[j] = Convert.ToInt32(row[j]);
+            }
+            return arr;
+        }
+        public double[] GetOneDoubleArray()
+        {
+            var arr = new double[CurrentTable.Columns.Count];
+            var row = CurrentTable.Rows[0];
+            for (int j = 0; j < CurrentTable.Columns.Count; j++)
+            {
+                arr[j] = Convert.ToDouble(row[j]);
             }
             return arr;
         }
