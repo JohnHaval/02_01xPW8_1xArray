@@ -13,9 +13,9 @@ namespace CreatingArray
         /// </summary>
         /// <returns></returns>
         public static double[] ShiftToJSort(double[] arr, int iShift)
-        {            
-            int dif = iShift / arr.Length;
-            if (dif != 0) iShift = iShift - arr.Length * 2;
+        {
+            if (iShift > arr.Length) throw new Exception("Сдвиг не может превышать размер массива!");//Указать в отчете
+            if (iShift < 0) throw new Exception("Сдвиг не может быть отрицательным!");//
             List<double> values = new List<double>();
             for (int i = iShift; i < arr.Length; i++)
             {

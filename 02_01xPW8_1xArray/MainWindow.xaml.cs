@@ -30,11 +30,12 @@ namespace _02_01xPW8_1xArray
         {
             try
             {
-                int rowCount = Convert.ToInt32(RowCount.Text);
+                int rowCount = Convert.ToInt32(RowCount.Text);//Указать в отчете
                 if(rowCount != 1)
                     VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.CreateArray(rowCount, Convert.ToInt32(ColumnCount.Text))).DefaultView;
                 else
                     VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.CreateArray(Convert.ToInt32(ColumnCount.Text))).DefaultView;
+                TableTab.Focus();
             }
             catch
             {
@@ -47,8 +48,8 @@ namespace _02_01xPW8_1xArray
         {
             try
             {
-                if (VisualArrayTable.ItemsSource == null) throw new Exception();
-                if (Array.CurrentTable.Rows.Count != 1)
+                if (VisualArrayTable.ItemsSource == null) throw new Exception();//Указать в отчете
+                if (Array.CurrentTable.Rows.Count != 1)//
                     VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.FillArray(Array.GetArray(), new ArrayCreator.Range(Convert.ToInt32(FirstValue.Text), Convert.ToInt32(SecondValue.Text)))).DefaultView;
                 else
                     VisualArrayTable.ItemsSource = Array.CreateTable(ArrayCreator.FillArray(Array.GetOneDoubleArray(), new ArrayCreator.Range(Convert.ToInt32(FirstValue.Text), Convert.ToInt32(SecondValue.Text)))).DefaultView;
@@ -64,13 +65,13 @@ namespace _02_01xPW8_1xArray
         string CurrentCell = "";
         private void VisualArrayTable_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            int iColumn = e.Column.DisplayIndex;
+            int iColumn = e.Column.DisplayIndex;//Указать в отчете
             CurrentCell = Array.GetOneArray()[iColumn].ToString();
         }
 
         private void VisualArrayTable_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            if (!double.TryParse(((TextBox)e.EditingElement).Text, out _))
+            if (!double.TryParse(((TextBox)e.EditingElement).Text, out _))//Указать в отчете
             {
                 ((TextBox)e.EditingElement).Text = CurrentCell;
                 e.Cancel = true;
@@ -82,6 +83,7 @@ namespace _02_01xPW8_1xArray
             VisualArrayTable.ItemsSource = null;
             Array.ClearTable();
             VisualArrayTable.Focus();
+            TableTab.Focus();
         }
 
         private void Help_Click(object sender, RoutedEventArgs e)
@@ -94,7 +96,9 @@ namespace _02_01xPW8_1xArray
         {
             try
             {
+                if (Array.CurrentTable.Rows.Count == 1) throw new Exception();//Указать в отчете
                 Result.Text = LessFinder.GetArrayMin(Array.GetArray()).ToString();
+                TableTab.Focus();
             }
             catch
             {
@@ -106,11 +110,17 @@ namespace _02_01xPW8_1xArray
         {
             try
             {
+                if (Array.CurrentTable.Rows.Count != 1) throw new Exception();//Указать в отчете
                 VisualArrayTable.ItemsSource = Array.CreateTable(ArraySorter.ShiftToJSort(Array.GetOneDoubleArray(), Convert.ToInt32(ShiftValue.Text))).DefaultView;
+                TableTab.Focus();
             }
-            catch
+            catch(InvalidCastException)
             {
-                MessageBox.Show("Массив не является одномерным!", "Нахождение наименьшего", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Некорректно введено значение сдвига!", "Сдвиг", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Сдвиг", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
