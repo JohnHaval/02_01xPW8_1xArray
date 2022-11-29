@@ -82,7 +82,7 @@ namespace CreatingArray
             }
             return arr;
         }
-        public static int[] FillArray(int[] arr, Range range)
+        public static double[] FillArray(double[] arr, Range range)
         {
             Random rnd = new Random();
             for (int j = 0; j < arr.Length; j++)
